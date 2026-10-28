@@ -7,26 +7,20 @@ use Illuminate\Http\Request;
 
 class MejaController extends Controller
 {
-    /**
-     * Menampilkan daftar meja (Master Meja & Area)
-     */
+    /** Menampilkan daftar meja (Master Meja & Area) (read)*/
     public function index()
     {
         $meja = Meja::orderBy('id', 'asc')->get();
         return view('meja.index', compact('meja'));
     }
 
-    /**
-     * Menampilkan form tambah meja
-     */
+    /** Menampilkan form tambah meja (create)*/
     public function create()
     {
         return view('meja.create');
     }
 
-    /**
-     * Menyimpan data meja baru
-     */
+    /** Menyimpan data meja baru (store)*/
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -50,18 +44,14 @@ class MejaController extends Controller
         return redirect()->route('meja.index')->with('success', 'Data meja berhasil ditambahkan!');
     }
 
-    /**
-     * Menampilkan form edit meja
-     */
+    /** Menampilkan form edit meja (edit)*/
     public function edit($id)
     {
         $meja = Meja::findOrFail($id);
         return view('meja.edit', compact('meja'));
     }
 
-    /**
-     * Memperbarui data meja
-     */
+    /** Memperbarui data meja (update)*/
     public function update(Request $request, $id)
     {
         $meja = Meja::findOrFail($id);
@@ -85,9 +75,7 @@ class MejaController extends Controller
         return redirect()->route('meja.index')->with('success', 'Data meja berhasil diperbarui!');
     }
 
-    /**
-     * Menghapus data meja
-     */
+    /** Menghapus data meja (delete).*/
     public function destroy($id)
     {
         $meja = Meja::findOrFail($id);
